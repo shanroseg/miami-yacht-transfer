@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Miami Yacht Transfer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #0a1628;
+      --deep: #0d1f3c;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --cream: #f5f0e8;
+      --white: #ffffff;
+      --muted: #8a9bb5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 60px 24px;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(13,31,60,0.8) 0%, transparent 50%),
+        linear-gradient(180deg, #0a1628 0%, #0d1f3c 50%, #091220 100%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 80px,
+        rgba(201,168,76,0.03) 80px,
+        rgba(201,168,76,0.03) 81px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 80px,
+        rgba(201,168,76,0.03) 80px,
+        rgba(201,168,76,0.03) 81px
+      );
+      pointer-events: none;
+    }
+
+    .wave-divider {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60px;
+      overflow: hidden;
+    }
+    .wave-divider svg { display: block; width: 100%; height: 100%; }
+
+    .logo-mark {
+      width: 64px;
+      height: 64px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+      font-size: 24px;
+      color: var(--gold);
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      animation: fadeDown 0.9s ease both;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(48px, 8vw, 96px);
+      line-height: 1.0;
+      letter-spacing: -1px;
+      color: var(--white);
+      margin-bottom: 8px;
+      animation: fadeDown 1s ease both;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+      animation: fadeDown 1.1s ease both;
+    }
+
+    .hero-desc {
+      max-width: 480px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.7);
+      margin-bottom: 48px;
+      animation: fadeDown 1.2s ease both;
+    }
+
+    .cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      animation: fadeDown 1.3s ease both;
+    }
+
+    .cta-text {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .cta-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 14px 40px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-101%);
+      transition: transform 0.3s ease;
+      z-index: -1;
+    }
+
+    .cta-btn:hover { color: var(--navy); }
+    .cta-btn:hover::before { transform: translateX(0); }
+
+    /* SERVICES */
+    .section {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 60px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .service-card {
+      padding: 48px 36px;
+      border: 1px solid rgba(201,168,76,0.1);
+      transition: background 0.3s ease;
+      position: relative;
+    }
+
+    .service-card:hover { background: rgba(201,168,76,0.04); }
+
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      font-weight: 300;
+      color: rgba(201,168,76,0.15);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .service-icon { font-size: 28px; margin-bottom: 16px; }
+
+    .service-name {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.6);
+    }
+
+    /* HOW IT WORKS */
+    .how-section {
+      background: var(--deep);
+      padding: 100px 24px;
+    }
+
+    .how-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 48px;
+      margin-top: 60px;
+    }
+
+    .step { position: relative; }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px;
+      font-weight: 300;
+      color: rgba(201,168,76,0.1);
+      line-height: 1;
+      margin-bottom: -20px;
+    }
+
+    .step-title {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .step-desc strong { color: var(--gold-light); font-weight: 400; }
+
+    /* CONSENT / TERMS */
+    .consent-section {
+      padding: 100px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .consent-box {
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 48px;
+      position: relative;
+    }
+
+    .consent-box::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 48px;
+      width: 80px; height: 2px;
+      background: var(--gold);
+    }
+
+    .consent-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .consent-text {
+      font-size: 13px;
+      line-height: 2;
+      color: rgba(245,240,232,0.65);
+      margin-bottom: 16px;
+    }
+
+    .consent-text a { color: var(--gold); text-decoration: none; }
+
+    .consent-highlight {
+      background: rgba(201,168,76,0.06);
+      border-left: 2px solid var(--gold);
+      padding: 16px 20px;
+      margin: 24px 0;
+      font-size: 13px;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.8);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+
+    .footer-text {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .consent-box { padding: 32px 24px; }
+      .service-card { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="logo-mark">⚓</div>
+    <p class="hero-eyebrow">Miami · Biscayne Bay</p>
+    <h1>Miami <em>Yacht</em><br>Transfer</h1>
+    <p class="hero-sub">Private Water Transfer Service</p>
+    <p class="hero-desc">
+      Premium on-demand boat transfers between vessels, marinas, and shore. 
+      Available across Miami's waterways.
+    </p>
+    <div class="cta-wrap">
+      <p class="cta-text">Book via text</p>
+      <p class="cta-num">(305) XXX-XXXX</p>
+      <a href="sms:+13055551234" class="cta-btn">Text to Book Now</a>
+    </div>
+    <div class="wave-divider">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#0d1f3c"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section style="background:#0d1f3c; padding: 100px 24px;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p class="section-label">Our Services</p>
+      <h2 class="section-title">Three Ways<br>We Move You</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <div class="service-icon">⛵ → 🏝️</div>
+          <p class="service-name">Boat to Shore</p>
+          <p class="service-desc">Get dropped off at any dock, marina, or waterfront location from your vessel.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <div class="service-icon">🏝️ → ⛵</div>
+          <p class="service-name">Shore to Boat</p>
+          <p class="service-desc">We pick you up from the marina or dock and deliver you directly to your yacht.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <div class="service-icon">⛵ → ⛵</div>
+          <p class="service-name">Boat to Boat</p>
+          <p class="service-desc">Transfer between vessels anchored in the bay quickly and comfortably.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="how-inner">
+      <p class="section-label">How It Works</p>
+      <h2 class="section-title">Book in Minutes</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <p class="step-title">Text Us</p>
+          <p class="step-desc">Send a text to <strong>(305) XXX-XXXX</strong> with your name, boat name, pickup location, destination, party size, and time.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p class="step-title">Get Confirmed</p>
+          <p class="step-desc">We'll reply with a confirmation and your <strong>Venmo payment link</strong>. Payment secures your booking.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p class="step-title">We Arrive</p>
+          <p class="step-desc">Your captain arrives at the agreed time. <strong>Sit back</strong> and enjoy the transfer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSENT / OPT-IN -->
+  <section class="consent-section" id="terms">
+    <p class="section-label">SMS Terms</p>
+    <div class="consent-box">
+      <h3 class="consent-title">Messaging Consent & Terms</h3>
+
+      <p class="consent-text">
+        Miami Yacht Transfer operates an SMS-based booking service. By texting our number, 
+        you are initiating contact and consenting to receive text message replies related to 
+        your transfer request.
+      </p>
+
+      <div class="consent-highlight">
+        <strong style="color:var(--gold-light);">How opt-in works:</strong><br>
+        Customers opt in to receive SMS messages by texting our published phone number 
+        to request a boat transfer. This inbound text constitutes express consent to receive 
+        booking confirmations, status updates, and service-related communications from 
+        Miami Yacht Transfer.
+      </div>
+
+      <p class="consent-text">
+        <strong style="color:var(--white); font-weight:400;">Message frequency:</strong> 
+        You will receive messages only in response to your booking requests — typically 
+        1–3 messages per transfer (confirmation, ETA, and completion).
+      </p>
+
+      <p class="consent-text">
+        <strong style="color:var(--white); font-weight:400;">Opt-out:</strong> 
+        Reply <strong>STOP</strong> at any time to unsubscribe from further messages. 
+        Reply <strong>HELP</strong> for assistance.
+      </p>
+
+      <p class="consent-text">
+        <strong style="color:var(--white); font-weight:400;">Message & data rates</strong> 
+        may apply depending on your carrier and plan.
+      </p>
+
+      <p class="consent-text">
+        We do not share your phone number or personal information with third parties 
+        except as necessary to fulfill your transfer (e.g., notifying your captain).
+      </p>
+
+      <p class="consent-text" style="margin-top:32px; font-size:12px; color:rgba(245,240,232,0.4);">
+        Last updated: 2026 · Miami Yacht Transfer · Miami, FL
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-logo">MIAMI YACHT TRANSFER</p>
+    <p class="footer-text">Miami, Florida · SMS Booking Service · Text to Book</p>
+  </footer>
+
+</body>
+</html>
